@@ -1,6 +1,7 @@
 package git.qwhai.mq.redis;
 
 import git.qwhai.mq.conf.RedisConfig;
+import git.qwhai.mq.model.RedisChannelListener;
 import org.apache.log4j.Logger;
 import redis.clients.jedis.Jedis;
 
@@ -28,6 +29,11 @@ public class RedisHelper {
     }
 
     public void registerChannel(byte[] channel) {
-        jedis.publish(channel, null);
+        jedis.subscribe(new RedisChannelListener(), channel);
+    }
+
+    public void publishChannel(byte[] channel, byte[] message) {
+        // TODO
+        jedis.publish(channel, message);
     }
 }
