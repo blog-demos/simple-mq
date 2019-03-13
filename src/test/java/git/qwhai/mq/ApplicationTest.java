@@ -2,6 +2,7 @@ package git.qwhai.mq;
 
 import git.qwhai.mq.model.Message;
 import git.qwhai.mq.redis.RedisHelper;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.io.IOException;
  */
 public class ApplicationTest {
 
+    private final Logger logger = Logger.getLogger(ApplicationTest.class);
+
     @Test
     public void testPublish() {
         RedisHelper redis = new RedisHelper();
@@ -19,6 +22,7 @@ public class ApplicationTest {
         Message message = new Message(1001, "Hello world.");
 
         try {
+            logger.info(String.format("已向[0x01020304]频道发布信息：%s", message.getContent()));
             redis.publishChannel(new byte[] { 0x01, 0x02, 0x03, 0x04 }, message.serialize());
         } catch (IOException ex) {
             ex.printStackTrace();
