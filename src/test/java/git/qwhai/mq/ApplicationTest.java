@@ -34,4 +34,9 @@ public class ApplicationTest {
         RedisHelper redis = new RedisHelper();
         redis.registerChannel(new byte[] { 0x01, 0x02, 0x03, 0x04 });
     }
+
+    @Test
+    public void testSubscribe1000() {
+        // TODO
+    }
 }
